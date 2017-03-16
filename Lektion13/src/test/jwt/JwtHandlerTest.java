@@ -1,17 +1,13 @@
 package test.jwt;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 import org.junit.Test;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import jwt.JWTHandler;
 
 public class JwtHandlerTest {
@@ -20,7 +16,7 @@ public class JwtHandlerTest {
 	public void testGenerateJwtToken() {
 		String token = JWTHandler.generateJwtToken();
 		System.out.println(token);
-		Jws<Claims> claims = JWTHandler.validateToken(token);
+		JWTHandler.validateToken(token);
 		
 		
 	}
