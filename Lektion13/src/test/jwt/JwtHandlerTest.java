@@ -8,13 +8,14 @@ import java.util.List;
 
 import org.junit.Test;
 
+import dto.User;
 import jwt.JWTHandler;
 
 public class JwtHandlerTest {
 
 	@Test
 	public void testGenerateJwtToken() {
-		String token = JWTHandler.generateJwtToken();
+		String token = JWTHandler.generateJwtToken(new User(-1L,"test","testpass"));
 		System.out.println(token);
 		JWTHandler.validateToken(token);
 		
@@ -27,7 +28,7 @@ public class JwtHandlerTest {
 		do {
 			
 			try {
-				String token = JWTHandler.generateJwtToken();
+				String token = JWTHandler.generateJwtToken(new User(-1L,"test","testpass"));
 				List<Character> cList = new ArrayList<Character>();
 				for(char c : token.toCharArray()) {
 				    cList.add(c);

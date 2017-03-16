@@ -11,6 +11,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status;
 
+import dto.User;
 import dto.UserPass;
 import jwt.JWTHandler;
 
@@ -26,13 +27,19 @@ public class LoginService {
 	@POST
 	public void getLogin(UserPass userPass){
 		if (validate(userPass)) {
-			response.addHeader("Authorization", "Bearer " + JWTHandler.generateJwtToken());
+			response.addHeader("Authorization", "Bearer " + JWTHandler.generateJwtToken(getUser(userPass.getuserName())));
 		} else {
 			throw new WebApplicationException(Status.FORBIDDEN);
 		}
 	}
 	
 	
+
+	private User getUser(String userName) {
+		return new User(-1L, userName, "");
+	}
+
+
 
 	private boolean validate(UserPass userPass) {
 		return "test".equals(userPass.getPassword()) && "test".equals(userPass.getPassword());

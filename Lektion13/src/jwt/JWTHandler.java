@@ -2,6 +2,7 @@ package jwt;
 
 
 import java.security.Key;
+import java.util.Calendar;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -15,11 +16,14 @@ import io.jsonwebtoken.impl.crypto.MacProvider;
 public class JWTHandler {
 		static Key key = MacProvider.generateKey(SignatureAlgorithm.HS512);
 		
-	public static String generateJwtToken(){
+	public static String generateJwtToken(User user){
+		Calendar expiry = Calendar.getInstance();
+		expiry.add(Calendar.MINUTE, 10);
 		return Jwts.builder()
 				.setIssuer("DiplomIt")
-				.claim("user", new User(1L,"test","testPass"))
+				.claim("user", user)
 				.signWith(SignatureAlgorithm.HS512, key)
+				.setExpiration(expiry.getTime())
 				.compact();
 	}
 	
