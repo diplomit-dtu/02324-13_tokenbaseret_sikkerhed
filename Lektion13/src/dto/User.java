@@ -16,6 +16,7 @@ public class User {
 	public Long getUserId() {
 		return userId;
 	}
+	
 	public void setUserId(Long userID) {
 		this.userId = userID;
 	}
