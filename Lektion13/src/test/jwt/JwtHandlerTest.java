@@ -17,7 +17,12 @@ public class JwtHandlerTest {
 	public void testGenerateJwtToken() {
 		String token = JWTHandler.generateJwtToken(new User(-1L,"test","testpass"));
 		System.out.println(token);
+
+		try{
 		JWTHandler.validateToken(token);
+		} catch (Exception e ){
+			fail();
+		}
 		
 		
 	}
