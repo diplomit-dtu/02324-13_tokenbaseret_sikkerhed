@@ -23,7 +23,7 @@ function login(){
 			auth = auth.split(" ")[1];
 			localStorage.setItem("jwt",auth);
 			console.log(localStorage.getItem("jwt"));
-			$('#main').load('loggedin.html');
+			$('#main').load('main.html');
 		}
 	});
 }

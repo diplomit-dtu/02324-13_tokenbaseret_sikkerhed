@@ -14,9 +14,8 @@ import javax.ws.rs.core.Response.Status;
 import dto.User;
 import dto.UserPass;
 import jwt.JWTHandler;
+import jwt.JWTHandler.AuthException;
 
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
 @Path("login")
 public class LoginService {
 	@Context
@@ -31,6 +30,20 @@ public class LoginService {
 		} else {
 			throw new WebApplicationException(Status.FORBIDDEN);
 		}
+	}
+	
+	@POST
+	@Path("validate")
+
+	public String validateToken(String token){		
+			try {
+				JWTHandler.validateToken(token);
+				return "Token valid!"; 
+			} catch (AuthException e) {
+				throw new WebApplicationException("Token invalid: " + e.getMessage(), 403);
+			}
+
+		
 	}
 	
 	
