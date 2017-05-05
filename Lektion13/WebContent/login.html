@@ -11,7 +11,6 @@
 function login(){
 	event.preventDefault();
 	var data = $("#loginform").serializeJSON();
-	alert(data);
 	var authHeader = "Bearer " + localStorage.getItem("jwt");
 	$.ajax({
 		url:'rest/login',
@@ -23,15 +22,16 @@ function login(){
 			var auth = jqXHR.getResponseHeader("Authorization");
 			auth = auth.split(" ")[1];
 			localStorage.setItem("jwt",auth);
-			alert(localStorage.get("jwt"));
+			console.log(localStorage.getItem("jwt"));
+			$('#main').load('loggedin.html');
 		}
 	});
 }
 </script>
 </head>
-<body><form id="loginform">
-User: <input type="text" name="username">
-Pass: <input type="text" name="password" >
+<body id="main"><form id="loginform">
+User: <input type="text" name="username" value="test">
+Pass: <input type="text" name="password" value="test">
 <button onclick="login();">submit</button>
 </form>
 
